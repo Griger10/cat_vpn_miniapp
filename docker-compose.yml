@@ -1,0 +1,56 @@
+services:
+  api:
+    container_name: cat_vpn_admin
+    build:
+      context: .
+      dockerfile: Dockerfile
+    env_file:
+      - .env
+    command: python -m src.backend.api
+    restart: unless-stopped
+    depends_on:
+      - postgres
+      - redis
+
+  bot:
+    container_name: cat_vpn_bot
+    build:
+      context: .
+      dockerfile: Dockerfile
+    env_file:
+      - .env
+    command: python -m src.backend.bot
+    restart: unless-stopped
+    depends_on:
+      - postgres
+      - redis
+
+  postgres:
+    container_name: cat_vpn_bot_db
+    image: postgres:17-alpine
+    restart: unless-stopped
+    env_file:
+      - .env
+    ports:
+      - "5432:5432"
+    volumes:
+      - "./db_data:/var/lib/postgresql/data"
+
+  redis:
+    container_name: cat_vpn_bot_redis
+    image: redis:latest
+    restart: unless-stopped
+    command:
+      - redis-server
+
+  nginx:
+    container_name: cat_vpn_nginx
+    build: nginx
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    depends_on:
+      - api
+
+volumes:
+  db_data:

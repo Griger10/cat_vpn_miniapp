@@ -1,9 +1,18 @@
 [project]
 name = "cat-vpn-miniapp"
 version = "0.1.0"
-description = "Add your description here"
+description = "Family mini app project"
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
+    "aiogram>=3.21.0",
+    "aiogram-dialog>=2.4.0",
+    "alembic>=1.16.4",
+    "asyncpg>=0.30.0",
+    "dishka>=1.6.0",
     "fastapi>=0.116.1",
+    "pydantic-settings>=2.10.1",
+    "redis>=6.4.0",
+    "sqlalchemy>=2.0.42",
+    "uvicorn>=0.35.0",
 ]
