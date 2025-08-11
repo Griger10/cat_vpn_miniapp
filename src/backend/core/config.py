@@ -23,6 +23,8 @@ class BotConfig(BaseSettings):
     model_config = SettingsConfigDict(env_prefix="BOT_")
     token: SecretStr
     admin_ids: str
+    admin_url: str
+    web_app_url: str
 
 
 class RedisConfig(BaseSettings):

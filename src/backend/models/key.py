@@ -8,7 +8,7 @@ from backend.core.db import Base
 
 
 class VPNKey(Base):
-    __tablename__ = 'keys'
+    __tablename__ = "keys"
 
     vpn_key_id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
     key: Mapped[str] = mapped_column(unique=True)
@@ -17,4 +17,4 @@ class VPNKey(Base):
         ForeignKey("users.tid", ondelete="CASCADE", onupdate="CASCADE"),
     )
 
-    user: Mapped["User"] = relationship("User", back_populates="keys")
+    user = relationship("User", back_populates="keys")

@@ -1,5 +1,5 @@
 from sqlalchemy import BigInteger
-from sqlalchemy.orm import Mapped, relationship, mapped_column
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from backend.core.db import Base
 
@@ -12,4 +12,4 @@ class User(Base):
     last_name: Mapped[str | None]
     username: Mapped[str | None]
 
-    keys: Mapped[list["VPNKey"]] = relationship("VPNKey", back_populates="user")
+    keys = relationship("VPNKey", back_populates="user")
