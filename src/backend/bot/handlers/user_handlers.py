@@ -1,4 +1,4 @@
-from aiogram import Router, Bot
+from aiogram import Bot, Router
 from aiogram.filters import Command
 from aiogram.types import Message
 from dishka import FromDishka

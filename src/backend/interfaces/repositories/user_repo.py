@@ -1,0 +1,16 @@
+from typing import Protocol
+
+from backend.models import User
+
+
+class UserRepository(Protocol):
+
+    async def upsert_user(
+            self,
+            tid: int,
+            first_name: str,
+            username: str | None,
+            last_name: str | None
+    ) -> None: ...
+
+    async def get_user_by_tid(self, tid: int) -> User | None: ...

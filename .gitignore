@@ -172,3 +172,4 @@ public_key.pem
 
 .package-lock.json
 node_modules/
+/src/frontend/package-lock.json

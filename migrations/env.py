@@ -8,6 +8,7 @@ from sqlalchemy.ext.asyncio import async_engine_from_config
 
 from backend.core.config import Config
 from backend.core.db import Base
+from backend.models import User, VPNKey # noqa
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
