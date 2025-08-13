@@ -169,3 +169,6 @@ cython_debug/
 
 private_key.pem
 public_key.pem
+
+.package-lock.json
+node_modules/
