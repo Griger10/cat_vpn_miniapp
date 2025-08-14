@@ -9,6 +9,7 @@ from dishka.integrations.aiogram import setup_dishka as setup_aiogram_dishka
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
+from backend.api.routers import user_router
 from backend.bot.handlers import user_handlers
 from backend.core.config import Config
 from backend.core.di.ioc import create_container
@@ -32,10 +33,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-
-@app.get("/")
-async def root():
-    return {"Hello": "World"}
+app.include_router(user_router)
 
 
 container = create_container()

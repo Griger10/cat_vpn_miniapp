@@ -1,12 +1,12 @@
 <script setup>
-import {ref, computed} from 'vue'
+import {ref, computed, onMounted} from 'vue'
+import {request} from "./js/api.js";
 
 const CONFIG = {
-    vpnKey: 'XXXX-XXXX-XXXX-XXXX',
-    botUsername: '@cat_vpn_bot'
+    botUsername: '@kitten_vpn_bot'
 }
 
-const vpnKey = ref(CONFIG.vpnKey)
+const vpnKey = ref('Не указано')
 const showHelp = ref(false)
 const showToast = ref(false)
 const toastMessage = ref('')
@@ -52,6 +52,16 @@ async function copyKey() {
         }
     }
 }
+
+onMounted(async () => {
+    let data = await request(
+        'users/info/',
+    ).data
+    if (data.vpnKey) {
+        vpnKey.value = data.vpnKey
+    }
+})
+
 </script>
 
 <template>
