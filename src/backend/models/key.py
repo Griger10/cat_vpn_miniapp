@@ -17,4 +17,4 @@ class VPNKey(Base):
         ForeignKey("users.tid", ondelete="CASCADE", onupdate="CASCADE"),
     )
 
-    user = relationship("User", back_populates="keys")
+    user = relationship("User", back_populates="key")

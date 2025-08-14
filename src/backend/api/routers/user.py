@@ -13,7 +13,7 @@ user_router = APIRouter(
     tags=["users"]
 )
 
-@router.get("/info/")
+@user_router.get("/info/")
 async def user_info(
         request: Request,
         auth_data: WebAppInitData = Depends(auth)

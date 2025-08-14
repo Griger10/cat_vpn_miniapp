@@ -1,6 +1,6 @@
 import logging
 
-from aiogram.utils.web_app import safe_parse_webapp_init_data, WebAppInitData
+from aiogram.utils.web_app import WebAppInitData, safe_parse_webapp_init_data
 from fastapi import HTTPException
 from fastapi.requests import Request
 from starlette.status import HTTP_401_UNAUTHORIZED
@@ -31,4 +31,4 @@ def auth(request: Request) -> WebAppInitData | None:
         raise HTTPException(
             status_code=HTTP_401_UNAUTHORIZED,
             detail="Unauthorized"
-        )
+        ) from e

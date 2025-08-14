@@ -12,4 +12,4 @@ class User(Base):
     last_name: Mapped[str | None]
     username: Mapped[str | None]
 
-    keys = relationship("VPNKey", back_populates="user")
+    key = relationship("VPNKey", back_populates="user", uselist=False, lazy="joined")

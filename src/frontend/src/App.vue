@@ -1,6 +1,13 @@
 <script setup>
 import {ref, computed, onMounted} from 'vue'
 import {request} from "./js/api.js";
+import {init, initData, viewport} from "@telegram-apps/sdk";
+
+init();
+viewport.mount();
+
+initData.restore();
+viewport.expand();
 
 const CONFIG = {
     botUsername: '@kitten_vpn_bot'
