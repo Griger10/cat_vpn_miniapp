@@ -31,6 +31,7 @@ async def user_information(
             last_name=auth_data.user.last_name,
             username=auth_data.user.username,
         )
+        user_info = await user_service.get_user(user_id)
     key = user_info.key.unique_key if user_info.key else None
     valid_until = user_info.key.valid_until.strftime("%d.%m.%Y") if user_info.key else None
     return JSONResponse(
