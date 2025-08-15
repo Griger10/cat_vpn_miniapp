@@ -22,3 +22,14 @@ cp .env.example .env
 # Frontend
 cd src/frontend
 cp .env.example .env
+```
+### 2. Запустить проект в Docker
+```bash
+# Docker
+docker compose up -d --build
+```
+### 3. Выполнить миграции alembic
+```bash
+# Alembic
+docker compose exec backend alembic upgrade head
+```
