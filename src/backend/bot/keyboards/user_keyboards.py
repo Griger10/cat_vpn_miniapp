@@ -10,7 +10,7 @@ def get_main_keyboard(
     return (
         InlineKeyboardBuilder()
         .button(text="⚙️ Настроить VPN", web_app=web_app)
-        .button(text="💳 Купить доступ", url=admin_url)
+        .button(text="❓ Техподдержка", url=admin_url)
         .adjust(1)
         .as_markup()
     )
