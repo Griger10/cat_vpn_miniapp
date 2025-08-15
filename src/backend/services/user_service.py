@@ -3,7 +3,6 @@ from backend.models import User
 
 
 class UserServiceImpl:
-
     def __init__(
             self,
             user_repo: UserRepository,

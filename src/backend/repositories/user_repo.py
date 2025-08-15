@@ -11,12 +11,12 @@ class UserRepositoryImpl:
     def __init__(self, session: AsyncSession):
         self._session = session
 
-    async def get_user_by_tid(self, tid: int) -> User:
+    async def get_user_by_tid(self, tid: int) -> User | None:
         stmt = select(self.model).where(self.model.tid == tid)
 
         result = await self._session.execute(stmt)
 
-        return result.scalar_one()
+        return result.scalar_one_or_none()
 
     async def upsert_user(
             self,

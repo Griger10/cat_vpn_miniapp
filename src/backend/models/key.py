@@ -11,7 +11,7 @@ class VPNKey(Base):
     __tablename__ = "keys"
 
     vpn_key_id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
-    key: Mapped[str] = mapped_column(unique=True)
+    unique_key: Mapped[str] = mapped_column(unique=True)
     valid_until: Mapped[datetime | None]
     tid: Mapped[int] = mapped_column(
         ForeignKey("users.tid", ondelete="CASCADE", onupdate="CASCADE"),

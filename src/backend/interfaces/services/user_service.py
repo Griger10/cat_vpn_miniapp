@@ -13,3 +13,5 @@ class UserService(Protocol):
             last_name: str | None,
             username: str | None
     ) -> None: ...
+
+    # todo: получение и отображение ключа

@@ -6,6 +6,7 @@ from aiogram import Bot, Dispatcher
 from aiogram.fsm.storage.base import DefaultKeyBuilder
 from aiogram.fsm.storage.redis import Redis, RedisStorage
 from dishka.integrations.aiogram import setup_dishka as setup_aiogram_dishka
+from dishka.integrations.fastapi import setup_dishka as setup_fastapi_dishka
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -35,7 +36,6 @@ app.add_middleware(
 
 app.include_router(user_router)
 
-
 container = create_container()
 config = Config()
 
@@ -53,6 +53,7 @@ dp = Dispatcher(storage=storage)
 dp.include_routers(user_handlers.router)
 
 setup_aiogram_dishka(container=container, router=dp, auto_inject=True)
+setup_fastapi_dishka(container=container, app=app)
 
 
 async def run_bot():

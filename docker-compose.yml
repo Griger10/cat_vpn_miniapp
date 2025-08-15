@@ -1,6 +1,6 @@
 services:
   backend:
-    container_name: cat_vpn_bot
+    container_name: cat_vpn_backend
     build:
       context: .
       dockerfile: src/backend/Dockerfile
