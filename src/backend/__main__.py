@@ -21,7 +21,7 @@ configure_logging()
 logger = logging.getLogger(__name__)
 
 app = FastAPI(
-    title="Кот VPN API",
+    title="Кот MiniApp API",
     root_path="/api",
     openapi_url="/openapi.json",
 )
