@@ -112,7 +112,7 @@ onMounted(async () => {
                             <button class="p-2 -m-2 text-white/70 hover:text-white" @click="closeHelp">✕</button>
                         </div>
                         <ol class="mt-4 space-y-3 text-sm text-white/80 list-decimal list-inside">
-                            <li>Установите приложение-клиент (WireGuard, Outline, ShadowSocks).</li>
+                            <li>Установите приложение-клиент V2RayTun в AppStore или Google Play.</li>
                             <li>Скопируйте ключ и вставьте в приложение.</li>
                             <li>Сохраните профиль и подключитесь.</li>
                             <li>Если возникнут вопросы, напишите в бота {{ uname }}.</li>
