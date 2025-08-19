@@ -1,12 +1,15 @@
+from datetime import datetime, timedelta
+
 from sqlalchemy import select
 from sqlalchemy.dialects.postgresql import insert
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from backend.models import User
+from backend.models import User, VPNKey
 
 
 class UserRepositoryImpl:
     model: type[User] = User
+    key: type[VPNKey] = VPNKey
 
     def __init__(self, session: AsyncSession):
         self._session = session
@@ -40,3 +43,13 @@ class UserRepositoryImpl:
         )
 
         await self._session.execute(stmt)
+
+    async def get_users_with_expiring_keys(self) -> list[User] | None:
+        stmt = select(self.model).join(self.key, self.model.key).where(
+            self.key.valid_until.isnot(None),
+            self.key.valid_until >= datetime.now() - timedelta(days=1)
+        )
+
+        result = await self._session.execute(stmt)
+
+        return list(result.scalars().all())

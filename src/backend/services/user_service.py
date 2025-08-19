@@ -1,3 +1,4 @@
+
 from backend.interfaces import TransactionManager, UserRepository
 from backend.models import User
 
@@ -23,3 +24,6 @@ class UserServiceImpl:
     ) -> None:
         await self.user_repo.upsert_user(tid, first_name, last_name, username)
         await self.t_manager.commit()
+
+    async def get_users_with_expiring_keys(self) -> list[User] | None:
+        return await self.user_repo.get_users_with_expiring_keys()

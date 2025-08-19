@@ -11,10 +11,13 @@ dependencies = [
     "cachetools>=6.1.0",
     "dishka>=1.6.0",
     "fastapi>=0.116.1",
+    "fluentogram>=1.2.1",
     "jinja2>=3.1.6",
     "pydantic-settings>=2.10.1",
     "redis>=6.4.0",
     "sqlalchemy>=2.0.42",
+    "taskiq>=0.11.18",
+    "taskiq-redis>=1.1.0",
     "uvicorn>=0.35.0",
 ]
 

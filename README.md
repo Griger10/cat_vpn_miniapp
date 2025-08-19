@@ -5,7 +5,7 @@
 ---
 
 ## 📦 Технологический стек
-- **Backend:** Python · FastAPI · Dishka · aiogram · SQLAlchemy · PostgreSQL · ruff 
+- **Backend:** Python · FastAPI · Dishka · aiogram · SQLAlchemy · PostgreSQL · ruff · taskiq 
 - **Frontend:** JavaScript · Vue 3 · axios  
 - **Инфраструктура:** Docker · пакетный менеджер `uv`
 

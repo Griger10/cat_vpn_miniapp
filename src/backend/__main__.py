@@ -7,14 +7,18 @@ from aiogram.fsm.storage.base import DefaultKeyBuilder
 from aiogram.fsm.storage.redis import Redis, RedisStorage
 from dishka.integrations.aiogram import setup_dishka as setup_aiogram_dishka
 from dishka.integrations.fastapi import setup_dishka as setup_fastapi_dishka
+from dishka.integrations.taskiq import setup_dishka as setup_taskiq_dishka
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from taskiq.api import run_receiver_task, run_scheduler_task
 
 from backend.api.routers import user_router
 from backend.bot.handlers import user_handlers
 from backend.core.config import Config
 from backend.core.di.ioc import create_container
 from backend.core.logging import configure_logging
+from backend.core.scheduler.broker import broker, scheduler
+from backend.core.scheduler.tasks import process_users_with_expiring_keys  # noqa
 
 configure_logging()
 
@@ -54,16 +58,17 @@ dp.include_routers(user_handlers.router)
 
 setup_aiogram_dishka(container=container, router=dp, auto_inject=True)
 setup_fastapi_dishka(container=container, app=app)
+setup_taskiq_dishka(container=container, broker=broker)
 
 
-async def run_bot():
+async def run_bot() -> None:
     bot = await container.get(Bot)
     logger.info("Starting Telegram bot...")
     await dp.start_polling(bot)
     logger.info("Telegram bot stopped")
 
 
-async def run_api():
+async def run_api() -> None:
     server_config = uvicorn.Config(
         app=app,
         host="0.0.0.0",
@@ -78,6 +83,9 @@ async def run_api():
 
 async def main():
     tasks = [
+        asyncio.create_task(broker.startup()),
+        asyncio.create_task(run_receiver_task(broker)),
+        asyncio.create_task(run_scheduler_task(scheduler)),
         asyncio.create_task(run_bot()),
         asyncio.create_task(run_api()),
     ]
