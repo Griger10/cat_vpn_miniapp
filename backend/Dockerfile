@@ -7,7 +7,7 @@ ENV UV_LINK_MODE=copy
 
 WORKDIR /app
 
-COPY pyproject.toml .
+COPY backend/pyproject.toml .
 
 RUN uv pip install --system --no-cache .
 
