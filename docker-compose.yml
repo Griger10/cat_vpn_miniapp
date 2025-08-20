@@ -3,10 +3,10 @@ services:
     container_name: cat_vpn_backend
     build:
       context: .
-      dockerfile: src/backend/Dockerfile
+      dockerfile: backend/Dockerfile
     env_file:
       - .env
-    command: python -m src.backend
+    command: python -m backend
     restart: unless-stopped
     depends_on:
       - postgres
@@ -16,7 +16,7 @@ services:
     container_name: cat_vpn_frontend
     build:
       context: .
-      dockerfile: src/frontend/Dockerfile
+      dockerfile: frontend/Dockerfile
     command: http-server dist
     restart: on-failure
     depends_on:
@@ -49,6 +49,20 @@ services:
     depends_on:
       - backend
       - frontend
+
+  prometheus:
+    image: prom/prometheus:v2.54.1
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+    ports:
+      - "9090:9090"
+
+  grafana:
+    image: grafana/grafana:latest
+    ports:
+      - "3000:3000"
+    env_file:
+      - .env
 
 volumes:
   db_data:
