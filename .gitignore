@@ -171,5 +171,5 @@ private_key.pem
 public_key.pem
 
 .package-lock.json
-node_modules/
-/src/frontend/package-lock.json
+frontend/node_modules/
+frontend/package-lock.json
