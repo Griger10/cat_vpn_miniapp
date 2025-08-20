@@ -12,7 +12,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from taskiq.api import run_receiver_task, run_scheduler_task
 
-from backend.api.routers import user_router
+from backend.api.routers import user_router, metrics_router
 from backend.bot.handlers import user_handlers
 from backend.core.config import Config
 from backend.core.logging import configure_logging
@@ -26,7 +26,7 @@ logger = logging.getLogger(__name__)
 
 app = FastAPI(
     title="Кот MiniApp API",
-    root_path="api",
+    root_path="/api",
     openapi_url="/openapi.json",
 )
 
@@ -39,6 +39,7 @@ app.add_middleware(
 )
 
 app.include_router(user_router)
+app.include_router(metrics_router)
 
 container = create_container()
 config = Config()

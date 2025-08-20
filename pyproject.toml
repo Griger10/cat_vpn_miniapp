@@ -13,6 +13,7 @@ dependencies = [
     "fastapi>=0.116.1",
     "fluentogram>=1.2.1",
     "jinja2>=3.1.6",
+    "prometheus-client>=0.22.1",
     "pydantic-settings>=2.10.1",
     "redis>=6.4.0",
     "sqlalchemy>=2.0.42",
@@ -21,13 +22,9 @@ dependencies = [
     "uvicorn>=0.35.0",
 ]
 
-[build-system]
-requires = ["setuptools>=61"]
-build-backend = "setuptools.build_meta"
-
-[tool.uv]
+[dependency-groups]
 lint = [
-    "ruff~=0.11.13",
+    "ruff~=0.12.9",
     "codespell~=2.4.1",
     "bandit~=1.8.5",
     "slotscheck~=0.19.1",
