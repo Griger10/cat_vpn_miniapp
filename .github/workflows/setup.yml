@@ -9,8 +9,12 @@ on:
 permissions:
   contents: read
 
+defaults:
+  run:
+    working-directory: backend
+
 jobs:
-  testing:
+  linting:
     name: Testing schedule_bot_dialog
     runs-on: ubuntu-latest
 
