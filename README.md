@@ -8,6 +8,7 @@
 - **Backend:** Python · FastAPI · Dishka · aiogram · SQLAlchemy · PostgreSQL · ruff · taskiq 
 - **Frontend:** JavaScript · Vue 3 · axios  
 - **Инфраструктура:** Docker · пакетный менеджер `uv`
+- **Мониторинг:** Prometheus · Grafana  
 
 ---
 
