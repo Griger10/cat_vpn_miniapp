@@ -25,7 +25,7 @@ dependencies = [
 requires = ["setuptools>=61"]
 build-backend = "setuptools.build_meta"
 
-[project.optional-dependencies]
+[tool.uv]
 lint = [
     "ruff~=0.11.13",
     "codespell~=2.4.1",
@@ -35,7 +35,10 @@ lint = [
 
 [tool.ruff]
 include = [
-    "src/**/*.py"
+    "backend/src/**/*.py",
+]
+exclude = [
+    "backend/src/**/migrations/*",
 ]
 fix = true
 line-length = 120
