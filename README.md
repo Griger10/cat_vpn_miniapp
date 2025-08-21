@@ -32,5 +32,5 @@ docker compose up -d --build
 ### 3. Выполнить миграции alembic
 ```bash
 # Alembic
-docker compose exec backend alembic upgrade head
+docker compose exec cat_vpn_miniapp alembic upgrade head
 ```

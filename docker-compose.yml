@@ -6,7 +6,7 @@ services:
       dockerfile: backend/Dockerfile
     env_file:
       - .env
-    command: python -m backend
+    command: python -m cat_vpn_miniapp
     restart: unless-stopped
     depends_on:
       - postgres

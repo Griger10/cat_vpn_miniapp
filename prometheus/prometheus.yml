@@ -3,6 +3,6 @@ global:
   evaluation_interval: 15s
 
 scrape_configs:
-  - job_name: "backend"
+  - job_name: "cat_vpn_miniapp"
     static_configs:
-      - targets: ["backend:8000"]
+      - targets: ["cat_vpn_miniapp:8000"]
