@@ -100,4 +100,4 @@ if __name__ == "__main__":
     except KeyboardInterrupt:
         logger.info("Application stopped by user")
     except Exception as e:
-        logger.exception(f"Application crashed: {e}")
+        logger.exception("Application crashed: %s", e)
