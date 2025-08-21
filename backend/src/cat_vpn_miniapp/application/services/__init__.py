@@ -1,5 +1,5 @@
-from cat_vpn_miniapp.application.services.user_service import UserServiceImpl
+from cat_vpn_miniapp.application.services.user_service import UserService
 
 __all__ = [
-    "UserServiceImpl",
+    "UserService",
 ]

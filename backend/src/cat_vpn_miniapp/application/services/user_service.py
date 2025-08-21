@@ -1,9 +1,9 @@
-from cat_vpn_miniapp.domain.interfaces.repositories import KeyRepository, UserRepository
-from cat_vpn_miniapp.domain.interfaces.transaction_manager import TransactionManager
+from cat_vpn_miniapp.application.transaction_manager import TransactionManager
+from cat_vpn_miniapp.domain.interfaces import KeyRepository, UserRepository
 from cat_vpn_miniapp.domain.models import User, VPNKey
 
 
-class UserServiceImpl:
+class UserService:
     def __init__(
             self,
             user_repo: UserRepository,

@@ -8,7 +8,7 @@ from prometheus_client import Counter
 from starlette.responses import JSONResponse
 from starlette.status import HTTP_200_OK
 
-from cat_vpn_miniapp.domain.interfaces import UserService
+from cat_vpn_miniapp.application.services import UserService
 from cat_vpn_miniapp.presentation.api.dependencies import auth
 
 REQUESTS_TOTAL = Counter(
