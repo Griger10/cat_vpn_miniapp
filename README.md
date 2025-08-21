@@ -17,11 +17,7 @@
 ### 1. Настройка окружения
 Перед запуском необходимо создать и заполнить файлы окружения по образцу:
 ```bash
-# Backend
-cp .env.example .env
-
-# Frontend
-cd src/frontend
+# Project
 cp .env.example .env
 ```
 ### 2. Запустить проект в Docker
