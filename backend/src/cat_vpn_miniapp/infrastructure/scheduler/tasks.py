@@ -7,7 +7,6 @@ from fluentogram import TranslatorRunner
 
 from cat_vpn_miniapp.application.services import UserService
 from cat_vpn_miniapp.bootstrap.config import Config
-
 from cat_vpn_miniapp.infrastructure.scheduler.broker import broker
 
 logger = logging.getLogger(__name__)

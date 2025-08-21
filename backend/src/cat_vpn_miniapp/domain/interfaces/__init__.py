@@ -1,6 +1,6 @@
-from cat_vpn_miniapp.domain.interfaces.repositories import UserRepository, KeyRepository
+from cat_vpn_miniapp.domain.interfaces.repositories import KeyRepository, UserRepository
 
 __all__ = [
-    "UserRepository",
     "KeyRepository",
+    "UserRepository",
 ]
