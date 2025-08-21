@@ -11,7 +11,7 @@ permissions:
 
 defaults:
   run:
-    working-directory: cat_vpn_miniapp
+    working-directory: backend
 
 jobs:
   linting:

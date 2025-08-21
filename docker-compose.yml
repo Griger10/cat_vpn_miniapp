@@ -5,7 +5,7 @@ services:
       context: .
       dockerfile: backend/Dockerfile
     env_file:
-      - .env
+      - backend/.env
     command: python -m cat_vpn_miniapp
     restart: unless-stopped
     depends_on:
@@ -19,6 +19,8 @@ services:
       dockerfile: frontend/Dockerfile
     command: http-server dist
     restart: on-failure
+    env_file:
+      - frontend/.env
     depends_on:
       - backend
 
@@ -27,7 +29,7 @@ services:
     image: postgres:17-alpine
     restart: unless-stopped
     env_file:
-      - .env
+      - backend/.env
     ports:
       - "5432:5432"
     volumes:
@@ -62,7 +64,7 @@ services:
     ports:
       - "3000:3000"
     env_file:
-      - .env
+      - backend/.env
 
 volumes:
   db_data:

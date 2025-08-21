@@ -1,7 +1,7 @@
 from dishka import Provider, Scope, provide
 from fluentogram import TranslatorHub, TranslatorRunner
 
-from cat_vpn_miniapp.i18n import create_translator_hub
+from cat_vpn_miniapp.infrastructure.i18n import create_translator_hub
 
 
 class TranslatorProvider(Provider):

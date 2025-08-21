@@ -36,10 +36,10 @@ lint = [
 
 [tool.ruff]
 include = [
-    "backend/src/**/*.py",
+    "src/**/*.py",
 ]
 exclude = [
-    "backend/src/**/migrations/*",
+    "src/**/migrations/*",
 ]
 fix = true
 line-length = 120

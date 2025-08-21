@@ -1,6 +1,6 @@
 from dishka import Provider, Scope, from_context, provide
 
-from cat_vpn_miniapp.core.config import Config
+from cat_vpn_miniapp.domain.config import Config
 
 
 class ConfigProvider(Provider):

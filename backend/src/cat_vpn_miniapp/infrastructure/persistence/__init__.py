@@ -1,8 +1,8 @@
-from cat_vpn_miniapp.infrastructure.persistence.db import Base
-from cat_vpn_miniapp.infrastructure.persistence.models import User, VPNKey
+from cat_vpn_miniapp.infrastructure.persistence.sqlalchemy.db import Base
+from cat_vpn_miniapp.infrastructure.persistence.sqlalchemy.models import SQLAlchemyUser, SQLAlchemyVPNKey
 
 __all__ = [
     "Base",
-    "User",
-    "VPNKey",
+    "SQLAlchemyUser",
+    "SQLAlchemyVPNKey",
 ]

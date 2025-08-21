@@ -1,0 +1,19 @@
+from typing import Protocol
+
+from cat_vpn_miniapp.domain.models import User, VPNKey
+
+
+class UserService(Protocol):
+    async def get_user(self, tid: int) -> User | None: ...
+
+    async def add_user_if_not_registered(
+            self,
+            tid: int,
+            first_name: str,
+            last_name: str | None,
+            username: str | None
+    ) -> None: ...
+
+    async def get_users_with_expiring_keys(self) -> list[User] | None: ...
+
+    async def get_user_vpn_key(self, tid: int) -> VPNKey | None: ...

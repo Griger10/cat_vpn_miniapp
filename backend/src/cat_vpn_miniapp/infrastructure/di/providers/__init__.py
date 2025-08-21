@@ -3,6 +3,7 @@ from dishka import Provider
 from cat_vpn_miniapp.infrastructure.di.providers.bot import BotProvider
 from cat_vpn_miniapp.infrastructure.di.providers.config import ConfigProvider
 from cat_vpn_miniapp.infrastructure.di.providers.database import DatabaseProvider
+from cat_vpn_miniapp.infrastructure.di.providers.key_repo import KeyRepositoryProvider
 from cat_vpn_miniapp.infrastructure.di.providers.transaction_manager import TransactionManagerProvider
 from cat_vpn_miniapp.infrastructure.di.providers.translator import TranslatorProvider
 from cat_vpn_miniapp.infrastructure.di.providers.user_repo import UserRepositoryProvider
@@ -15,6 +16,7 @@ def get_providers() -> list[Provider]:
         DatabaseProvider(),
         BotProvider(),
         UserRepositoryProvider(),
+        KeyRepositoryProvider(),
         TransactionManagerProvider(),
         UserServiceProvider(),
         TranslatorProvider(),

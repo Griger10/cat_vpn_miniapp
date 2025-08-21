@@ -5,9 +5,9 @@ from dishka import FromDishka
 from dishka.integrations.taskiq import inject
 from fluentogram import TranslatorRunner
 
-from cat_vpn_miniapp.core.config import Config
+from cat_vpn_miniapp.domain.config import Config
+from cat_vpn_miniapp.domain.interfaces import UserService
 from cat_vpn_miniapp.infrastructure.scheduler.broker import broker
-from cat_vpn_miniapp.interfaces import UserService
 
 logger = logging.getLogger(__name__)
 

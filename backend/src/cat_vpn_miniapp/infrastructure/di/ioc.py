@@ -1,6 +1,6 @@
 from dishka import AsyncContainer, make_async_container
 
-from cat_vpn_miniapp.core.config import Config
+from cat_vpn_miniapp.domain.config import Config
 from cat_vpn_miniapp.infrastructure.di.providers import get_providers
 
 

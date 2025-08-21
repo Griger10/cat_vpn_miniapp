@@ -1,7 +1,9 @@
 from dishka import Provider, Scope, provide
 
-from cat_vpn_miniapp.interfaces import TransactionManager, UserRepository, UserService
-from cat_vpn_miniapp.services import UserServiceImpl
+from cat_vpn_miniapp.application.services.user_service import UserServiceImpl
+from cat_vpn_miniapp.domain.interfaces.repositories import KeyRepository, UserRepository
+from cat_vpn_miniapp.domain.interfaces.services import UserService
+from cat_vpn_miniapp.domain.interfaces.transaction_manager import TransactionManager
 
 
 class UserServiceProvider(Provider):
@@ -9,6 +11,8 @@ class UserServiceProvider(Provider):
 
     @provide(scope=Scope.REQUEST)
     async def get_repository(
-            self, user_repo: UserRepository, t_manager: TransactionManager
+            self, user_repo: UserRepository,
+            key_repo: KeyRepository,
+            t_manager: TransactionManager
     ) -> UserService:
-        return UserServiceImpl(user_repo=user_repo, t_manager=t_manager)
+        return UserServiceImpl(user_repo=user_repo, t_manager=t_manager, key_repo=key_repo)
