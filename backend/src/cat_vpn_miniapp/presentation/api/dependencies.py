@@ -5,7 +5,7 @@ from fastapi import HTTPException
 from fastapi.requests import Request
 from starlette.status import HTTP_401_UNAUTHORIZED
 
-from cat_vpn_miniapp.domain.config import Config
+from cat_vpn_miniapp.bootstrap.config import Config
 
 logger = logging.getLogger(__name__)
 

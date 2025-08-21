@@ -12,9 +12,9 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from taskiq.api import run_receiver_task, run_scheduler_task
 
-from cat_vpn_miniapp.domain.config import Config
-from cat_vpn_miniapp.domain.logging import configure_logging
-from cat_vpn_miniapp.infrastructure.di.ioc import create_container
+from cat_vpn_miniapp.bootstrap.config import Config
+from cat_vpn_miniapp.bootstrap.di.ioc import create_container
+from cat_vpn_miniapp.bootstrap.logging import configure_logging
 from cat_vpn_miniapp.infrastructure.scheduler.broker import broker, scheduler
 from cat_vpn_miniapp.infrastructure.scheduler.tasks import process_users_with_expiring_keys  # noqa
 from cat_vpn_miniapp.presentation.api.routers import metrics_router, user_router

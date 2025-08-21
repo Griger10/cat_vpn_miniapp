@@ -6,7 +6,7 @@ from sqlalchemy import pool
 from sqlalchemy.engine import Connection
 from sqlalchemy.ext.asyncio import async_engine_from_config
 
-from cat_vpn_miniapp.domain.config import Config
+from cat_vpn_miniapp.bootstrap.config import Config
 from cat_vpn_miniapp.infrastructure.persistence import Base, SQLAlchemyUser, SQLAlchemyVPNKey  # noqa
 
 # this is the Alembic Config object, which provides

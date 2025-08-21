@@ -5,7 +5,7 @@ from aiogram.client.default import DefaultBotProperties
 from aiogram.enums import ParseMode
 from dishka import Provider, Scope, provide
 
-from cat_vpn_miniapp.domain.config import Config
+from cat_vpn_miniapp.bootstrap.config import Config
 
 
 class BotProvider(Provider):

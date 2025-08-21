@@ -1,7 +1,7 @@
 from dishka import AsyncContainer, make_async_container
 
-from cat_vpn_miniapp.domain.config import Config
-from cat_vpn_miniapp.infrastructure.di.providers import get_providers
+from cat_vpn_miniapp.bootstrap.config import Config
+from cat_vpn_miniapp.bootstrap.di.providers import get_providers
 
 
 def create_container() -> AsyncContainer:

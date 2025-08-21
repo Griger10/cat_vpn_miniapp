@@ -4,7 +4,7 @@ from taskiq import TaskiqEvents, TaskiqScheduler, TaskiqState
 from taskiq.schedule_sources import LabelScheduleSource
 from taskiq_redis import ListRedisScheduleSource, RedisStreamBroker
 
-from cat_vpn_miniapp.domain.config import Config
+from cat_vpn_miniapp.bootstrap.config import Config
 
 config = Config()
 

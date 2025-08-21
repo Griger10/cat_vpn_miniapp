@@ -3,7 +3,7 @@ from aiogram.filters import Command
 from aiogram.types import Message
 from dishka import FromDishka
 
-from cat_vpn_miniapp.domain.config import Config
+from cat_vpn_miniapp.bootstrap.config import Config
 from cat_vpn_miniapp.presentation.bot.keyboards.main_menu import set_main_menu
 from cat_vpn_miniapp.presentation.bot.keyboards.user_keyboards import get_main_keyboard
 
