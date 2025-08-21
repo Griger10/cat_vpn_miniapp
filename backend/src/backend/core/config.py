@@ -32,6 +32,11 @@ class RedisConfig(BaseSettings):
     host: str
     port: int
 
+    @computed_field
+    @property
+    def redis_url(self) -> str:
+        return f"redis://{self.host}:{self.port}"
+
 
 class Config(BaseSettings):
     model_config = SettingsConfigDict(case_sensitive=False)

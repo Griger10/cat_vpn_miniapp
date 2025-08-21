@@ -4,9 +4,13 @@ from taskiq import TaskiqEvents, TaskiqScheduler, TaskiqState
 from taskiq.schedule_sources import LabelScheduleSource
 from taskiq_redis import ListRedisScheduleSource, RedisStreamBroker
 
-broker = RedisStreamBroker("redis://redis:6379")
+from backend.core.config import Config
 
-redis_source = ListRedisScheduleSource(url="redis://redis:6379")
+config = Config()
+
+broker = RedisStreamBroker(url=config.redis_config.redis_url)
+
+redis_source = ListRedisScheduleSource(url=config.redis_config.redis_url)
 
 scheduler = TaskiqScheduler(broker, [redis_source, LabelScheduleSource(broker)])
 
