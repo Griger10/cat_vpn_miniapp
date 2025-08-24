@@ -10,6 +10,10 @@ from dishka.integrations.fastapi import setup_dishka as setup_fastapi_dishka
 from dishka.integrations.taskiq import setup_dishka as setup_taskiq_dishka
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from slowapi import Limiter, _rate_limit_exceeded_handler
+from slowapi.errors import RateLimitExceeded
+from slowapi.middleware import SlowAPIMiddleware
+from slowapi.util import get_remote_address
 from taskiq.api import run_receiver_task, run_scheduler_task
 
 from cat_vpn_miniapp.bootstrap.config import Config
@@ -22,13 +26,25 @@ from cat_vpn_miniapp.presentation.bot.handlers import user_handlers
 
 configure_logging()
 
+config = Config()
+
 logger = logging.getLogger(__name__)
+
+limiter = Limiter(
+    key_func=get_remote_address,
+    storage_uri=config.redis_config.redis_url,
+    default_limits=["15/minute"]
+)
 
 app = FastAPI(
     title="Кот MiniApp API",
     root_path="/api",
     openapi_url="/openapi.json",
 )
+
+app.state.limiter = limiter
+app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
+app.add_middleware(SlowAPIMiddleware)
 
 app.add_middleware(
     CORSMiddleware,

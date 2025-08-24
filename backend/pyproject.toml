@@ -16,6 +16,7 @@ dependencies = [
     "prometheus-client>=0.22.1",
     "pydantic-settings>=2.10.1",
     "redis>=6.4.0",
+    "slowapi>=0.1.9",
     "sqlalchemy>=2.0.42",
     "taskiq>=0.11.18",
     "taskiq-redis>=1.1.0",
