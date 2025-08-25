@@ -68,3 +68,12 @@ class SQLAlchemyUserRepository:
         result = await self._session.execute(stmt)
 
         return [_to_domain_model(user) for user in result.scalars().all()]
+
+    async def add_user_vpn_key(self, tid: int, key: str, valid_until: datetime) -> None:
+        stmt = insert(self.key).values(
+            tid=tid,
+            unique_key=key,
+            valid_until=valid_until,
+        )
+
+        await self._session.execute(stmt)

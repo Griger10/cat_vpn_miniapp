@@ -32,3 +32,7 @@ class UserService:
 
     async def get_user_vpn_key(self, tid: int) -> VPNKey | None:
         return await self.key_repo.get_user_vpn_key(tid)
+
+    async def add_user_vpn_key(self, tid: int, key: str) -> None:
+        await self.user_repo.add_user_vpn_key(tid, key)
+        await self.t_manager.commit()

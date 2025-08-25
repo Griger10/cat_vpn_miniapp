@@ -5,10 +5,11 @@ description = "Family mini app project"
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
-    "aiogram>=3.21.0",
+    "aiogram==3.21.0",
+    "aiogram-dialog>=2.4.0",
     "alembic>=1.16.4",
     "asyncpg>=0.30.0",
-    "cachetools>=6.1.0",
+    "cachetools==5.5.2",
     "dishka>=1.6.0",
     "fastapi>=0.116.1",
     "fluentogram>=1.2.1",

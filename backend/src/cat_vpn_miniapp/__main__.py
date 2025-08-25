@@ -5,6 +5,7 @@ import uvicorn
 from aiogram import Bot, Dispatcher
 from aiogram.fsm.storage.base import DefaultKeyBuilder
 from aiogram.fsm.storage.redis import Redis, RedisStorage
+from aiogram_dialog import setup_dialogs
 from dishka.integrations.aiogram import setup_dishka as setup_aiogram_dishka
 from dishka.integrations.fastapi import setup_dishka as setup_fastapi_dishka
 from dishka.integrations.taskiq import setup_dishka as setup_taskiq_dishka
@@ -72,6 +73,8 @@ storage = RedisStorage(
 
 dp = Dispatcher(storage=storage)
 dp.include_routers(user_handlers.router)
+
+setup_dialogs(dp)
 
 setup_aiogram_dishka(container=container, router=dp, auto_inject=True)
 setup_fastapi_dishka(container=container, app=app)
