@@ -1,19 +1,26 @@
 from datetime import date
-
-from babel.dates import get_day_names, get_month_names
+from typing import TYPE_CHECKING
 
 from aiogram_dialog import DialogManager
 from aiogram_dialog.widgets.kbd import (
-    Calendar, CalendarScope,
+    Calendar,
+    CalendarScope,
 )
 from aiogram_dialog.widgets.kbd.calendar_kbd import (
-    CalendarDaysView, CalendarMonthView,
-    CalendarScopeView, CalendarYearsView,
-    DATE_TEXT, TODAY_TEXT,
+    DATE_TEXT,
+    TODAY_TEXT,
+    CalendarDaysView,
+    CalendarMonthView,
+    CalendarScopeView,
+    CalendarYearsView,
 )
 from aiogram_dialog.widgets.text import Format, Text
+from babel.dates import get_day_names, get_month_names
 
 SELECTED_DAYS_KEY = "selected_dates"
+
+if TYPE_CHECKING:
+    from datetime import date
 
 
 class WeekDay(Text):
@@ -21,7 +28,9 @@ class WeekDay(Text):
         selected_date: date = data["date"]
         locale = manager.event.from_user.language_code
         return get_day_names(
-            width="short", context='stand-alone', locale=locale,
+            width="short",
+            context="stand-alone",
+            locale=locale,
         )[selected_date.weekday()].title()
 
 
@@ -45,7 +54,9 @@ class Month(Text):
         selected_date: date = data["date"]
         locale = manager.event.from_user.language_code
         return get_month_names(
-            'wide', context='stand-alone', locale=locale,
+            "wide",
+            context="stand-alone",
+            locale=locale,
         )[selected_date.month].title()
 
 

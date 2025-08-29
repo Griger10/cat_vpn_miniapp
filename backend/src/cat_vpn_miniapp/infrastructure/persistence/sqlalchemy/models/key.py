@@ -14,6 +14,7 @@ class SQLAlchemyVPNKey(Base):
     valid_until: Mapped[datetime | None]
     tid: Mapped[int] = mapped_column(
         ForeignKey("users.tid", ondelete="CASCADE", onupdate="CASCADE"),
+        unique=True,
     )
 
     user = relationship("SQLAlchemyUser", back_populates="key")

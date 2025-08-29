@@ -11,24 +11,16 @@ from starlette.status import HTTP_200_OK
 from cat_vpn_miniapp.application.services import UserService
 from cat_vpn_miniapp.presentation.api.dependencies import auth
 
-REQUESTS_TOTAL = Counter(
-    "http_requests_total",
-    "Total number of HTTP requests for endpoints",
-    ["method", "endpoint"]
-)
+REQUESTS_TOTAL = Counter("http_requests_total", "Total number of HTTP requests for endpoints", ["method", "endpoint"])
 
-user_router = APIRouter(
-    prefix="/users",
-    route_class=DishkaRoute,
-    tags=["users"]
-)
+user_router = APIRouter(prefix="/users", route_class=DishkaRoute, tags=["users"])
 
 
 @user_router.get("/info/", status_code=HTTP_200_OK)
 async def user_information(
-        request: Request,
-        user_service: FromDishka[UserService],
-        auth_data: WebAppInitData = Depends(auth),
+    request: Request,
+    user_service: FromDishka[UserService],
+    auth_data: WebAppInitData = Depends(auth),
 ) -> JSONResponse:
     REQUESTS_TOTAL.labels(method="GET", endpoint="/info/").inc()
     await user_service.add_user_if_not_registered(
@@ -40,10 +32,4 @@ async def user_information(
     key_info = await user_service.get_user_vpn_key(auth_data.user.id)
     key = key_info.unique_key if key_info else None
     valid_until = key_info.valid_until.strftime("%d.%m.%Y") if key_info and key_info.valid_until else None
-    return JSONResponse(
-        {
-            "user_id": auth_data.user.id,
-            "vpn_key": key,
-            "vpn_key_expiry": valid_until
-        }
-    )
+    return JSONResponse({"user_id": auth_data.user.id, "vpn_key": key, "vpn_key_expiry": valid_until})

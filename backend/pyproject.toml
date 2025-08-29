@@ -5,9 +5,9 @@ description = "Family mini app project"
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
-    "aiogram==3.21.0",
+    "aiogram==3.22.0",
     "aiogram-dialog>=2.4.0",
-    "alembic>=1.16.4",
+    "alembic==1.16.5",
     "asyncpg>=0.30.0",
     "cachetools==5.5.2",
     "dishka>=1.6.0",
@@ -18,7 +18,7 @@ dependencies = [
     "pydantic-settings>=2.10.1",
     "redis>=6.4.0",
     "slowapi>=0.1.9",
-    "sqlalchemy>=2.0.42",
+    "sqlalchemy==2.0.43",
     "taskiq>=0.11.18",
     "taskiq-redis>=1.1.0",
     "uvicorn>=0.35.0",

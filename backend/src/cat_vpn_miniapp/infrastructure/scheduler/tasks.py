@@ -15,11 +15,11 @@ logger = logging.getLogger(__name__)
 @broker.task(task_name="notify_about_users_with_expiring_keys", schedule=[{"cron": "0 9 * * *"}])
 @inject(patch_module=True)
 async def process_users_with_expiring_keys(
-        user_service: FromDishka[UserService],
-        i18n: FromDishka[TranslatorRunner],
+    user_service: FromDishka[UserService],
+    i18n: FromDishka[TranslatorRunner],
 ):
     users = await user_service.get_users_with_expiring_keys()
-    logger.info(F"found {len(users)} users")
+    logger.info(f"found {len(users)} users")
     for user in users:
         text = i18n.key.expiring(name=user.first_name, valid_until=user.key.valid_until)
         await notify_user_about_with_expiring_key.kiq(tid=user.tid, text=text)
@@ -33,9 +33,9 @@ async def process_users_with_expiring_keys(
 @broker.task(task_name="send_message_to_admin")
 @inject(patch_module=True)
 async def send_message_to_admins(
-        admin_text: str,
-        bot: FromDishka[Bot],
-        config: FromDishka[Config],
+    admin_text: str,
+    bot: FromDishka[Bot],
+    config: FromDishka[Config],
 ):
     admin_ids = [int(admin_id) for admin_id in config.bot_config.admin_ids.split(",") if admin_id]
     for admin_id in admin_ids:
@@ -45,8 +45,8 @@ async def send_message_to_admins(
 @broker.task(task_name="notify_user_about_with_expiring_key")
 @inject(patch_module=True)
 async def notify_user_about_with_expiring_key(
-        tid: int,
-        text: str,
-        bot: FromDishka[Bot],
+    tid: int,
+    text: str,
+    bot: FromDishka[Bot],
 ):
     await bot.send_message(chat_id=tid, text=text)

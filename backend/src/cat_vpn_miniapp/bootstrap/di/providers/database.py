@@ -23,4 +23,3 @@ class DatabaseProvider(Provider):
     async def get_session(self, pool: async_sessionmaker[AsyncSession]) -> AsyncIterable[AsyncSession]:
         async with pool() as session:
             yield session
-

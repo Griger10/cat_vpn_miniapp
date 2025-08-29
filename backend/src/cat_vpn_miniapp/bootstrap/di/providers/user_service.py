@@ -10,8 +10,6 @@ class UserServiceProvider(Provider):
 
     @provide(scope=Scope.REQUEST)
     async def get_repository(
-            self, user_repo: UserRepository,
-            key_repo: KeyRepository,
-            t_manager: TransactionManager
+        self, user_repo: UserRepository, key_repo: KeyRepository, t_manager: TransactionManager
     ) -> UserService:
         return UserService(user_repo=user_repo, t_manager=t_manager, key_repo=key_repo)

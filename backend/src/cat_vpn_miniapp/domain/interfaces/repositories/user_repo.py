@@ -4,17 +4,10 @@ from cat_vpn_miniapp.domain.models import User
 
 
 class UserRepository(Protocol):
-
-    async def upsert_user(
-            self,
-            tid: int,
-            first_name: str,
-            username: str | None,
-            last_name: str | None
-    ) -> None: ...
+    async def upsert_user(self, tid: int, first_name: str, username: str | None, last_name: str | None) -> None: ...
 
     async def get_user_by_tid(self, tid: int) -> User | None: ...
 
     async def get_users_with_expiring_keys(self) -> list[User] | None: ...
 
-    async def add_user_vpn_key(self, tid: int, key: str) -> None: ...
+    async def get_all_users(self) -> list[User] | None: ...

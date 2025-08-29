@@ -2,10 +2,7 @@ from aiogram.types import InlineKeyboardMarkup, WebAppInfo
 from aiogram.utils.keyboard import InlineKeyboardBuilder
 
 
-def get_main_keyboard(
-        web_app_url: str,
-        admin_url: str
-) -> InlineKeyboardMarkup:
+def get_main_keyboard(web_app_url: str, admin_url: str) -> InlineKeyboardMarkup:
     web_app = WebAppInfo(url=web_app_url)
     return (
         InlineKeyboardBuilder()
@@ -15,10 +12,8 @@ def get_main_keyboard(
         .as_markup()
     )
 
-def get_admin_main_keyboard(
-        web_app_url: str,
-        admin_url: str
-):
+
+def get_admin_main_keyboard(web_app_url: str, admin_url: str):
     web_app = WebAppInfo(url=web_app_url)
     return (
         InlineKeyboardBuilder()
@@ -28,4 +23,3 @@ def get_admin_main_keyboard(
         .adjust(1)
         .as_markup()
     )
-

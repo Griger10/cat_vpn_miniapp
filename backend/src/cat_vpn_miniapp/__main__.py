@@ -23,6 +23,7 @@ from cat_vpn_miniapp.bootstrap.logging import configure_logging
 from cat_vpn_miniapp.infrastructure.scheduler.broker import broker, scheduler
 from cat_vpn_miniapp.infrastructure.scheduler.tasks import process_users_with_expiring_keys  # noqa
 from cat_vpn_miniapp.presentation.api.routers import metrics_router, user_router
+from cat_vpn_miniapp.presentation.bot.bot_dialogs.dialogs import add_key_dialog
 from cat_vpn_miniapp.presentation.bot.handlers import user_handlers
 
 configure_logging()
@@ -31,11 +32,7 @@ config = Config()
 
 logger = logging.getLogger(__name__)
 
-limiter = Limiter(
-    key_func=get_remote_address,
-    storage_uri=config.redis_config.redis_url,
-    default_limits=["15/minute"]
-)
+limiter = Limiter(key_func=get_remote_address, storage_uri=config.redis_config.redis_url, default_limits=["15/minute"])
 
 app = FastAPI(
     title="Кот MiniApp API",
@@ -72,7 +69,7 @@ storage = RedisStorage(
 )
 
 dp = Dispatcher(storage=storage)
-dp.include_routers(user_handlers.router)
+dp.include_routers(user_handlers.router, add_key_dialog)
 
 setup_dialogs(dp)
 
@@ -90,10 +87,7 @@ async def run_bot() -> None:
 
 async def run_api() -> None:
     server_config = uvicorn.Config(
-        app=app,
-        host="0.0.0.0",
-        port=8000,
-        log_level=logging.getLevelName(logging.INFO).lower()
+        app=app, host="0.0.0.0", port=8000, log_level=logging.getLevelName(logging.INFO).lower()
     )
     server = uvicorn.Server(server_config)
     logger.info("Starting API server...")

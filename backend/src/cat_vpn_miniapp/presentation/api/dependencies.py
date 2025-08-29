@@ -21,14 +21,8 @@ def auth(request: Request) -> WebAppInitData | None:
                 token=config.bot_config.token.get_secret_value(),
             )
             return data
-        raise HTTPException(
-            status_code=HTTP_401_UNAUTHORIZED,
-            detail="Unauthorized"
-        )
+        raise HTTPException(status_code=HTTP_401_UNAUTHORIZED, detail="Unauthorized")
 
     except Exception as e:
         logger.warning("Trying unauthorized request: %s", e)
-        raise HTTPException(
-            status_code=HTTP_401_UNAUTHORIZED,
-            detail="Unauthorized"
-        ) from e
+        raise HTTPException(status_code=HTTP_401_UNAUTHORIZED, detail="Unauthorized") from e

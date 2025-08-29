@@ -13,10 +13,7 @@ class PostgresConfig(BaseSettings):
     @computed_field
     @property
     def database_url(self) -> str:
-        return (
-            f"postgresql+asyncpg://{self.user}:{self.password.get_secret_value()}"
-            f"@{self.host}:{self.port}/{self.db}"
-        )
+        return f"postgresql+asyncpg://{self.user}:{self.password.get_secret_value()}@{self.host}:{self.port}/{self.db}"
 
 
 class BotConfig(BaseSettings):

@@ -36,13 +36,7 @@ class SQLAlchemyUserRepository:
 
         return _to_domain_model(result.scalar_one_or_none())
 
-    async def upsert_user(
-            self,
-            tid: int,
-            first_name: str,
-            last_name: str | None,
-            username: str | None
-    ) -> None:
+    async def upsert_user(self, tid: int, first_name: str, last_name: str | None, username: str | None) -> None:
         stmt = insert(self.user).values(
             tid=tid,
             username=username,
@@ -60,20 +54,19 @@ class SQLAlchemyUserRepository:
         await self._session.execute(stmt)
 
     async def get_users_with_expiring_keys(self) -> list[User] | None:
-        stmt = select(self.user).join(self.key, self.user.key).where(
-            self.key.valid_until.isnot(None),
-            self.key.valid_until >= datetime.now() - timedelta(days=1)
+        stmt = (
+            select(self.user)
+            .join(self.key, self.user.key)
+            .where(self.key.valid_until.isnot(None), self.key.valid_until >= datetime.now() - timedelta(days=1))
         )
 
         result = await self._session.execute(stmt)
 
         return [_to_domain_model(user) for user in result.scalars().all()]
 
-    async def add_user_vpn_key(self, tid: int, key: str, valid_until: datetime) -> None:
-        stmt = insert(self.key).values(
-            tid=tid,
-            unique_key=key,
-            valid_until=valid_until,
-        )
+    async def get_all_users(self):
+        stmt = select(self.user).select_from(self.user)
 
-        await self._session.execute(stmt)
+        result = await self._session.execute(stmt)
+
+        return [_to_domain_model(user) for user in result.scalars().all()]

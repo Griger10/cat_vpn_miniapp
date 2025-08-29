@@ -1,4 +1,7 @@
+from datetime import datetime
+
 from sqlalchemy import select
+from sqlalchemy.dialects.postgresql import insert
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from cat_vpn_miniapp.domain.models import VPNKey
@@ -24,10 +27,25 @@ class SQLAlchemyKeyRepository:
         self._session = session
 
     async def get_user_vpn_key(self, tid: int) -> VPNKey | None:
-        stmt = select(self.key).join(self.user).where(
-            self.user.tid == tid
-        )
+        stmt = select(self.key).join(self.user).where(self.user.tid == tid)
 
         result = await self._session.execute(stmt)
 
         return _to_domain_model(result.scalar_one_or_none())
+
+    async def add_key_for_user(self, tid: int, unique_key: str, valid_until: datetime) -> None:
+        stmt = insert(self.key).values(
+            tid=tid,
+            valid_until=valid_until,
+            unique_key=unique_key,
+        )
+
+        stmt = stmt.on_conflict_do_update(
+            index_elements=["tid"],
+            set_={
+                "unique_key": unique_key,
+                "valid_until": valid_until,
+            },
+        )
+
+        await self._session.execute(stmt)

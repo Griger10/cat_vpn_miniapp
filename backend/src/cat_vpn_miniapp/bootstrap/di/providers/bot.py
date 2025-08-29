@@ -14,9 +14,9 @@ class BotProvider(Provider):
     @provide
     async def get_bot(self, config: Config) -> AsyncIterable[Bot]:
         async with Bot(
-                token=config.bot_config.token.get_secret_value(),
-                default=DefaultBotProperties(
-                    parse_mode=ParseMode.HTML,
-                )
+            token=config.bot_config.token.get_secret_value(),
+            default=DefaultBotProperties(
+                parse_mode=ParseMode.HTML,
+            ),
         ) as bot:
             yield bot

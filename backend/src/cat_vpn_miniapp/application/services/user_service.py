@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from cat_vpn_miniapp.application.transaction_manager import TransactionManager
 from cat_vpn_miniapp.domain.interfaces import KeyRepository, UserRepository
 from cat_vpn_miniapp.domain.models import User, VPNKey
@@ -5,10 +7,10 @@ from cat_vpn_miniapp.domain.models import User, VPNKey
 
 class UserService:
     def __init__(
-            self,
-            user_repo: UserRepository,
-            t_manager: TransactionManager,
-            key_repo: KeyRepository,
+        self,
+        user_repo: UserRepository,
+        t_manager: TransactionManager,
+        key_repo: KeyRepository,
     ) -> None:
         self.user_repo = user_repo
         self.t_manager = t_manager
@@ -18,11 +20,7 @@ class UserService:
         return await self.user_repo.get_user_by_tid(tid)
 
     async def add_user_if_not_registered(
-            self,
-            tid: int,
-            first_name: str,
-            last_name: str | None,
-            username: str | None
+        self, tid: int, first_name: str, last_name: str | None, username: str | None
     ) -> None:
         await self.user_repo.upsert_user(tid, first_name, last_name, username)
         await self.t_manager.commit()
@@ -33,6 +31,9 @@ class UserService:
     async def get_user_vpn_key(self, tid: int) -> VPNKey | None:
         return await self.key_repo.get_user_vpn_key(tid)
 
-    async def add_user_vpn_key(self, tid: int, key: str) -> None:
-        await self.user_repo.add_user_vpn_key(tid, key)
+    async def add_user_vpn_key(self, tid: int, key: str, valid_until: datetime) -> None:
+        await self.key_repo.add_key_for_user(tid=tid, unique_key=key, valid_until=valid_until)
         await self.t_manager.commit()
+
+    async def get_all_users(self) -> list[User] | None:
+        return await self.user_repo.get_all_users()
