@@ -4,44 +4,53 @@ import {request} from '@/utils/api.ts'
 import {init, initData, viewport} from '@telegram-apps/sdk'
 import Header from '@/components/Header.vue'
 import Footer from '@/components/Footer.vue'
-import type {IUser} from "@/interfaces/IUser.ts";
+import type {IUser} from '@/interfaces/IUser.ts'
+
 
 init()
 viewport.mount()
 initData.restore()
 viewport.expand()
 
-const CONFIG = {botUsername: '@kitten_vpn_bot'}
+const CONFIG: { botUsername: `@${string}` } = {botUsername: '@kitten_vpn_bot'}
 
-const vpnKey = ref('Не указано')
-const vpnKeyExpiry = ref(null)
-const showHelp = ref(false)
-const showToast = ref(false)
-const toastMessage = ref('')
+const vpnKey = ref<string>('Не указано')
 
-const year = computed(() => new Date().getFullYear())
-const uname = computed(() => CONFIG.botUsername)
-const unameClean = computed(() =>
+type VpnKeyExpiryT = NonNullable<IUser['vpn_key_expiry']>
+const vpnKeyExpiry = ref<VpnKeyExpiryT | null>(null)
+
+const showHelp = ref<boolean>(false)
+const showToast = ref<boolean>(false)
+const toastMessage = ref<string>('')
+
+const year = computed<number>(() => new Date().getFullYear())
+const uname = computed<string>(() => CONFIG.botUsername)
+const unameClean = computed<string>(() =>
     uname.value.startsWith('@') ? uname.value.slice(1) : uname.value
 )
-const botHref = computed(() => `https://t.me/${unameClean.value}`)
+const botHref = computed<string>(() => `https://t.me/${unameClean.value}`)
 
-const vpnKeyExpiryText = computed(() => {
+const vpnKeyExpiryText = computed<string>(() => {
     if (!vpnKeyExpiry.value) return 'Бессрочный'
-
-    return vpnKeyExpiry.value
+    return String(vpnKeyExpiry.value)
 })
 
-const openHelp = () => (showHelp.value = true)
-const closeHelp = () => (showHelp.value = false)
-
-function triggerToast(message: string) {
-    toastMessage.value = message
-    showToast.value = true
-    setTimeout(() => (showToast.value = false), 1700)
+const openHelp = (): void => {
+    showHelp.value = true
+}
+const closeHelp = (): void => {
+    showHelp.value = false
 }
 
-async function copyKey() {
+function triggerToast(message: string): void {
+    toastMessage.value = message
+    showToast.value = true
+    setTimeout(() => {
+        showToast.value = false
+    }, 1700)
+}
+
+async function copyKey(): Promise<void> {
     try {
         await navigator.clipboard.writeText(vpnKey.value)
         triggerToast('Ключ скопирован')
@@ -58,12 +67,11 @@ async function copyKey() {
     }
 }
 
-onMounted(async () => {
+onMounted(async (): Promise<void> => {
     const {data}: { data: IUser } = await request('users/info/')
     if (data.vpn_key) vpnKey.value = data.vpn_key
     if (data.vpn_key_expiry) vpnKeyExpiry.value = data.vpn_key_expiry
 })
-
 </script>
 
 <template>
