@@ -30,7 +30,6 @@ add_key_dialog = Dialog(
             height=5,
             id="user_scrolling_group",
         ),
-        Button(text=Const("Назад"), on_click=switch_to_previous_dialog, id="give_key_back"),
         getter=get_all_users,
         state=AddKeyFSM.user,
     ),
