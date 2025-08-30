@@ -13,7 +13,7 @@ from cat_vpn_miniapp.presentation.bot.bot_dialogs.handlers import (
 )
 from cat_vpn_miniapp.presentation.bot.fsm import AddKeyFSM
 from cat_vpn_miniapp.presentation.bot.keyboards.customized_calendar import CustomCalendar
-from cat_vpn_miniapp.presentation.bot.utils.dialogs import go_back
+from cat_vpn_miniapp.presentation.bot.utils.dialogs import go_back, switch_to_previous_dialog
 
 add_key_dialog = Dialog(
     Window(
@@ -30,6 +30,7 @@ add_key_dialog = Dialog(
             height=5,
             id="user_scrolling_group",
         ),
+        Button(text=Const("Назад"), on_click=switch_to_previous_dialog, id="give_key_back"),
         getter=get_all_users,
         state=AddKeyFSM.user,
     ),
