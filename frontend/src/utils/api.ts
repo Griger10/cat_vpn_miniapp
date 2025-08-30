@@ -8,9 +8,9 @@ export const request = async (endpoint: string, method: string = "GET", data?: a
             method: method,
             url: `${base_url}/${endpoint}`,
             headers: {
-                initData: `${initData.raw()}`,
-                Accept: "application/json",
-                "Content-Type": "application/json",
+              initData: `${initData.raw()}`,
+              Accept: "application/json",
+              "Content-Type": "application/json",
             },
             data: data ? JSON.stringify(data) : undefined,
         }

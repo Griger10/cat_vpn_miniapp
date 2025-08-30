@@ -13,7 +13,7 @@ from cat_vpn_miniapp.presentation.bot.bot_dialogs.handlers import (
 )
 from cat_vpn_miniapp.presentation.bot.fsm import AddKeyFSM
 from cat_vpn_miniapp.presentation.bot.keyboards.customized_calendar import CustomCalendar
-from cat_vpn_miniapp.presentation.bot.utils.dialogs import go_back, switch_to_previous_dialog
+from cat_vpn_miniapp.presentation.bot.utils.dialogs import go_back
 
 add_key_dialog = Dialog(
     Window(
