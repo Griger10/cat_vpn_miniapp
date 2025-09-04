@@ -19,7 +19,8 @@
     "target": "ESNext",
     "moduleResolution": "bundler",
     "types": [
-      "node"
+      "node",
+      "vite/client"
     ]
   }
 }
